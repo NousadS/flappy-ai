@@ -1,0 +1,13 @@
+[project]
+name = "flappy-ai"
+version = "1.0"
+description = "Game Flappy Bird but with AI."
+authors = [{ name = "NousadS", email = "nousad.cat@gmail.com" }]
+dependencies = ["pygame>=2.6.1", "pillow>=11.0.0"]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = { text = "MIT" }
+
+
+[tool.pdm]
+distribution = false
