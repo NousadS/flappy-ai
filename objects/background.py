@@ -33,4 +33,4 @@ class Background(Entity):
         # --- Drawing ---
 
         self.image.fill(self.colors.background)
-        self.image.blit(self.textures.background, (0, self.rect.height - 234))
+        self.image.blit(self.textures.background, (0, self.rect.height - self.textures.get_height()))

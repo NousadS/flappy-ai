@@ -3,6 +3,7 @@ import random
 import pygame
 
 from objects.pipe import PipeTop
+
 from .entity import Entity
 
 
@@ -28,24 +29,24 @@ class Intellect:
         if self.parent is None:
             self.skin = random.randint(0, self.globals.bird_texture_height - 1)
 
-            self.weights = [random.uniform(*self.globals.weights_clamp) for _ in range(len(self.neurons))]
+            self.weights = [random.uniform(*self.globals.intellect_weights_clamp) for _ in range(len(self.neurons))]
         else:
             self.skin = self.parent.skin
 
             self.weights = self.parent.weights.copy()
 
-            if self.globals.learning:
+            if self.globals.intellect_learning:
                 for i in range(len(self.weights)):
-                    uniform = random.uniform(-0.05, 0.05)
+                    uniform = random.uniform(*self.globals.intellect_intellect_rate_clamp)
 
-                    self.skin += uniform * 10 * 36
+                    self.skin += uniform * 10 * self.bird.height
                     self.weights[i] += uniform
 
             self.skin = round(self.skin)
             self.skin = max(0, min(self.skin, self.globals.bird_texture_height - 1))
 
     def think(self):
-        self.score += 1
+        self.score += self.globals.intellect_score_increase
 
         nearest = None
 
@@ -70,6 +71,7 @@ class Intellect:
 
             self.out = sum([i[0] * i[1] for i in zip(self.neurons, self.weights)])
 
+
 class Bird(Entity):
     def __init__(self, engine: "Engine", parent: "Intellect" = None):  # type: ignore  # noqa: F821
         super().__init__(engine)
@@ -86,7 +88,12 @@ class Bird(Entity):
         self.width = self.texture.get_width() // self.globals.bird_texture_width
         self.height = self.texture.get_height() // self.globals.bird_texture_height
 
-        self.texture = self.texture.subsurface(0, self.intellect.skin * self.height, self.width * self.globals.bird_max_frame, self.height)
+        self.texture = self.texture.subsurface(
+            0,
+            self.intellect.skin * self.height,
+            self.width * self.globals.bird_max_frame,
+            self.height,
+        )
 
         self.image = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
 
@@ -127,7 +134,7 @@ class Bird(Entity):
 
         if pygame.sprite.spritecollide(self, self.pipes, False):
             self.intellect.alive = False
-            
+
             self.sounds.death.play()
 
             self.kill()
@@ -140,7 +147,7 @@ class Bird(Entity):
 
         # --- Drawing ---
 
-        self.frame = (self.frame + 0.1) % (self.globals.bird_max_frame - 1)
+        self.frame = (self.frame + self.globals.frame_speed) % (self.globals.bird_max_frame - 1)
 
         self.image.fill(self.colors.transparent)
         self.image.blit(self.texture, (round(self.frame) * -self.width, 0))
@@ -152,5 +159,4 @@ class Bird(Entity):
             if len(self.birds) <= 5:
                 self.sounds.jump.play()
 
-            self.jump_delay = 15
-
+            self.jump_delay = self.globals.bird_jump_delay

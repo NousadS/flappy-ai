@@ -1,3 +1,5 @@
+# NOTE: Full generated AI code.
+
 import colorsys
 
 from PIL import Image

@@ -1,3 +1,5 @@
+# NOTE: Full generated AI code.
+
 from PIL import Image
 
 def extract_unique_colors(image_path):

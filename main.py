@@ -28,10 +28,10 @@ class Engine:
 
         self.background = Background(self)
         self.overlay = Overlay(self)
-        
+
         self.clouds = pygame.sprite.Group()
 
-        for _ in range(10):
+        for _ in range(self.globals.cloud_initial_count):
             self.clouds.add(Cloud(self))
 
     def run(self):
@@ -40,12 +40,12 @@ class Engine:
         self.birds = pygame.sprite.Group()
         self.pipes = pygame.sprite.Group()
 
-        for _ in range(1):
+        for _ in range(self.globals.bird_initial_count):
             self.birds.add(Bird(self, self.best))
 
         self.best = None
 
-        for _ in range(1):
+        for _ in range(self.globals.pipe_initial_count):
             self.pipes.add(PipeTop(self))
 
         # --- Running ---
@@ -58,6 +58,7 @@ class Engine:
 
         while self.running:
             objects = pygame.sprite.Group()
+
             objects.add(self.background)  # THIS
             objects.add(self.clouds)  # IS
             objects.add(self.pipes)  # FIXED
@@ -81,13 +82,13 @@ class Engine:
 
                 objects.update()
 
-            self.screen.fill((0, 0, 0))
+            self.screen.fill(self.colors.white)
 
             objects.draw(self.screen)
 
             pygame.display.update()
 
-            self.clock.tick(60)
+            self.clock.tick(self.globals.fps)
 
     def pause(self):
         self.paused = not self.paused

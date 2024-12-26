@@ -13,7 +13,7 @@ class PipeTop(Entity):
 
         # --- Properties ---
 
-        self.gap = random.randint(100, 200)
+        self.gap = random.randint(*self.globals.pipe_gap_clamp)
         self.spawned = False
 
         # --- Drawing ---
@@ -25,13 +25,21 @@ class PipeTop(Entity):
 
         self.texture = self.texture.subsurface(0, 0, self.width, self.height)
 
-        self.image = pygame.Surface((self.width, self.height * 2 + self.gap), pygame.SRCALPHA)
+        self.image = pygame.Surface(
+            (self.width, self.height * 2 + self.gap), pygame.SRCALPHA
+        )
 
         # --- Movement ---
 
         self.rect = self.texture.get_rect()
         self.rect.x = self.screen.get_width()
-        self.rect.y = random.randint(self.globals.pipes_y_gap, self.screen.get_height() - self.globals.pipes_y_gap) - self.height
+        self.rect.y = (
+            random.randint(
+                self.globals.pipe_padding,
+                self.screen.get_height() - self.globals.pipe_padding,
+            )
+            - self.height
+        )
 
         self.speed = pygame.math.Vector2(*self.globals.pipe_speed)
 
@@ -49,7 +57,7 @@ class PipeTop(Entity):
         if self.rect.x + self.width <= 0:
             self.kill()
 
-        if self.rect.x <= self.globals.pipe_spawn_gap and not self.spawned:
+        if self.rect.x <= self.globals.pipe_spawn and not self.spawned:
             PipeTop(self.engine)
 
             self.spawned = True
@@ -82,7 +90,9 @@ class PipeBottom(Entity):
 
         self.texture = self.texture.subsurface(self.width, 0, self.width, self.height)
 
-        self.image = pygame.Surface((self.width, self.height * 2 + self.top.gap), pygame.SRCALPHA)
+        self.image = pygame.Surface(
+            (self.width, self.height * 2 + self.top.gap), pygame.SRCALPHA
+        )
 
         # --- Movement ---
 
