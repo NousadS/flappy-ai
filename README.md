@@ -3,19 +3,22 @@
 The Flappy Bird, but with AI.
 
 Documentation available in:
+
 - [English](https://github.com/NousadS/flappy-ai/blob/main/README.md)
 - [Russian](https://github.com/NousadS/flappy-ai/blob/main/README-ru.md)
+- [German](https://github.com/NousadS/flappy-ai/blob/main/README-de.md)
 
-# Key combinations
+## Key combinations
 
 `=` - Disables all key combinations \
 `p` - Pause
 
 `h` - Shows the hitboxes:
- - green: hitbox without a collision
- - red: hitbox with a collision
 
-`b` - Shows the best bird menu \
+- green: hitbox without a collision
+- red: hitbox with a collision
+
+`b` - Shows the menu of the best birds \
 `i` - Shows a bird ID over it \
 `s` - Shows a score of the bird above it
 
@@ -27,7 +30,7 @@ Documentation available in:
 
 `ESC` - Exit from the game
 
-# Global parameters
+## Global parameters
 
 Global parameters are stored in Globals.py in Globals class. \
 Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you can change them, but this is not recommended.
@@ -50,7 +53,7 @@ Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you
 
 **bird_jump_delay** (15) - how much will the jump delay be
 
-# Pipe
+### Pipe
 
 **pipe_initial_count** (1) - how many pipes will spawn (not recommended to change)
 
@@ -63,7 +66,7 @@ Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you
 **pipe_spawn** (400) - position when a new pipe spawn
 **pipe_speed** (-2, 0) - pipe speed
 
-# Cloud
+### Cloud
 
 **cloud_initial_count** (10) - how many clouds will spawn
 
@@ -75,7 +78,7 @@ Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you
 
 **cloud_speed_clamp** (-1, -1) - limit of random speed
 
-# Intellect
+### Intellect
 
 **intellect_skin_clamp** (-30, 30) - random values limit ​​of the skin
 **intellect_weights_clamp** (-0.1, 0.1) - random scales limit of intellect
@@ -84,11 +87,11 @@ Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you
 **intellect_score_increase** (1) - how much does the score increase in the frame
 **intellect_learning** (True) - will intelligence learn or not
 
-# Game
+### Game
 
 **fps** (60) - frame per second
 
-# Interface
+### Interface
 
 ![Interface](https://raw.githubusercontent.com/NousadS/flappy-ai/refs/heads/main/readme/interface.png)
 
