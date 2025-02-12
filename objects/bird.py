@@ -37,7 +37,7 @@ class Intellect:
 
             if self.globals.intellect_learning:
                 for i in range(len(self.weights)):
-                    uniform = random.uniform(*self.globals.intellect_intellect_rate_clamp)
+                    uniform = random.uniform(*self.globals.intellect_rate_clamp)
 
                     self.skin += uniform * 10 * self.bird.height
                     self.weights[i] += uniform
@@ -78,15 +78,20 @@ class Bird(Entity):
 
         # --- Properties ---
 
-        self.intellect = Intellect(self, parent)
         self.id = max([bird.id for bird in engine.birds], default=0) + 1
 
-        # --- Drawing ---
+        # --- Textures ---
 
         self.texture = self.textures.birds
 
         self.width = self.texture.get_width() // self.globals.bird_texture_width
         self.height = self.texture.get_height() // self.globals.bird_texture_height
+
+        # --- Intellect ---
+
+        self.intellect = Intellect(self, parent)
+
+        # --- Drawing ---
 
         self.texture = self.texture.subsurface(
             0,
@@ -107,6 +112,7 @@ class Bird(Entity):
         self.jump_speed = self.globals.bird_jump_speed
         self.jump_delay = 0
         self.gravity = self.globals.bird_gravity
+
 
     def event(self, event: pygame.event.Event):
         super().event(event)
