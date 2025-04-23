@@ -87,6 +87,8 @@ Near the Globals class there are Colors, Fonts, Sounds and Textures classes, you
 **intellect_score_increase** (1) - how much does the score increase in the frame
 **intellect_learning** (True) - will intelligence learn or not
 
+**intellect_fast_learning** (True) - Will intelligence study faster (and worse) or not
+
 ### Game
 
 **fps** (60) - frame per second

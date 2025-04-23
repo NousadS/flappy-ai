@@ -54,8 +54,9 @@ class Intellect:
             if nearest is None or (isinstance(pipe, PipeTop) and pipe.rect.x >= self.globals.bird_x - self.bird.width * 2 and pipe.rect.x < nearest.rect.x):
                 nearest = pipe
 
-        if nearest.rect.y + nearest.height + nearest.gap // 2 > self.bird.rect.y > nearest.rect.y + nearest.height:
-            self.score += abs(nearest.rect.y + nearest.height + nearest.gap // 2 - self.bird.rect.y)
+        if self.globals.intellect_fast_learning:
+            if nearest.rect.y + nearest.height + nearest.gap // 2 > self.bird.rect.y > nearest.rect.y + nearest.height:
+                self.score += abs(nearest.rect.y + nearest.height + nearest.gap // 2 - self.bird.rect.y)
 
         if nearest is None:
             self.out = 0

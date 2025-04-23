@@ -56,6 +56,8 @@ class Globals:
         self.intellect_score_increase = 1
         self.intellect_learning = True
 
+        self.intellect_fast_learning = False
+
         # --- Game ---
 
         self.fps = 60
